@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class MarimbaPiece extends StatefulWidget {
@@ -6,11 +7,13 @@ class MarimbaPiece extends StatefulWidget {
     required this.colorPiece,
     required this.widthRelation,
     required this.pointUbication,
+    required this.soundAsset,
   });
 
   final Color colorPiece;
   final double widthRelation;
   final double pointUbication;
+  final String soundAsset;
 
   @override
   State<MarimbaPiece> createState() => _MarimbaPieceState();
@@ -20,10 +23,13 @@ class _MarimbaPieceState extends State<MarimbaPiece>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _shakeAnimation;
+  late AudioPlayer _audioPlayer;
 
   @override
   void initState() {
     super.initState();
+
+    _audioPlayer = AudioPlayer();
 
     _controller = AnimationController(
       vsync: this,
@@ -50,6 +56,10 @@ class _MarimbaPieceState extends State<MarimbaPiece>
     });
   }
 
+  void _playSound() async {
+    _audioPlayer.play(AssetSource(widget.soundAsset));
+  }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -66,6 +76,7 @@ class _MarimbaPieceState extends State<MarimbaPiece>
         GestureDetector(
           onTap: () {
             _controller.forward();
+            _playSound();
           },
           child: Transform.translate(
             offset: Offset(_shakeAnimation.value, 0),
