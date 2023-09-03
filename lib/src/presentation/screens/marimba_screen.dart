@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:marimba_app/src/presentation/screens/settings_screen.dart';
 import 'package:marimba_app/src/presentation/widgets/marimba_piece.dart';
 
 class MarimbaScreen extends StatelessWidget {
@@ -13,7 +14,12 @@ class MarimbaScreen extends StatelessWidget {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          color: Colors.brown,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/fondo_1.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: const Column(
             children: [
               MarimbaPiece(
@@ -66,6 +72,22 @@ class MarimbaScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const SettingsScreen(instrumentName: 'Piano')));
+        },
+        child: const Icon(
+          Icons.settings_outlined,
+          size: 38,
+          color: Colors.black,
         ),
       ),
     );

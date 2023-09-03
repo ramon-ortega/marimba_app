@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marimba_app/src/presentation/screens/marimba_screen.dart';
+import 'package:marimba_app/src/presentation/screens/piano_screen.dart';
+import 'package:marimba_app/src/presentation/screens/settings_screen.dart';
+import 'package:marimba_app/src/presentation/screens/welcome_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +22,9 @@ class MyApp extends StatelessWidget {
       title: 'Marimba App',
       debugShowCheckedModeBanner: false,
       routes: {
+        '/welcome': (_) => const WelcomeScreen(),
         '/marimba': (_) => const MarimbaScreen(),
+        '/piano': (_) => const PianoScreen(),
       },
       initialRoute: '/marimba',
     );
